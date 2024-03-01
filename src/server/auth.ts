@@ -51,9 +51,12 @@ export const {
 
       if (!user.emailVerified) {
         const verificationToken =
-          await api.auth.generateVerificationToken.query();
+          await api.auth.generateVerificationToken.query({
+            email: user.email!,
+          });
         await api.auth.sendVerificationEmail.query({
           token: verificationToken.token,
+          email: user.email!,
         });
       }
       return true;

@@ -55,43 +55,45 @@ export const authRouter = createTRPCRouter({
     }),
 
   sendVerificationEmail: publicProcedure
-    .input(z.object({ token: z.string() }))
+    .input(z.object({ token: z.string(), email: z.string() }))
     .query(async ({ input, ctx }) => {
       const confirmLink = `http://localhost:3000/auth/new-verification?token=${input.token}`;
       const resend = new Resend(process.env.RESEND_API_KEY);
 
       await resend.emails.send({
         from: "info@drizzy.ch",
-        to: ctx.session?.user.email!,
+        to: input.email,
         subject: "Confirm your email",
         html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
       });
     }),
 
-  generateVerificationToken: publicProcedure.query(async ({ ctx }) => {
-    const token = uuidv4();
-    const expires = new Date(new Date().getTime() + 3600 * 1000);
+  generateVerificationToken: publicProcedure
+    .input(z.object({ email: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const token = uuidv4();
+      const expires = new Date(new Date().getTime() + 3600 * 1000);
 
-    const existingToken = await ctx.db.verificationToken.findFirst({
-      where: { email: ctx.session?.user.email! },
-    });
+      const existingToken = await ctx.db.verificationToken.findFirst({
+        where: { email: input.email },
+      });
 
-    if (existingToken) {
-      await ctx.db.verificationToken.delete({
-        where: {
-          id: existingToken.id,
+      if (existingToken) {
+        await ctx.db.verificationToken.delete({
+          where: {
+            id: existingToken.id,
+          },
+        });
+      }
+
+      const verficationToken = await ctx.db.verificationToken.create({
+        data: {
+          email: input.email,
+          token,
+          expires,
         },
       });
-    }
 
-    const verficationToken = await ctx.db.verificationToken.create({
-      data: {
-        email: ctx.session?.user.email!,
-        token,
-        expires,
-      },
-    });
-
-    return verficationToken;
-  }),
+      return verficationToken;
+    }),
 });
