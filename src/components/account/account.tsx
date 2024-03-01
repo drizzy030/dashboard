@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -9,10 +8,11 @@ import {
   Input,
 } from "@nextui-org/react";
 import { auth } from "~/server/auth";
+import { Send } from "./send";
 
 export async function Account() {
   const session = await auth();
-
+  const email = session?.user.email;
   return (
     <section>
       <div className="h-full lg:px-6">
@@ -100,7 +100,7 @@ export async function Account() {
                 </CardBody>
                 <Divider />
                 <CardFooter className="w-full justify-between">
-                  {!session?.user.emailVerified && <Button>Resend</Button>}
+                  <Send email={email!} />
                 </CardFooter>
               </Card>
             </div>

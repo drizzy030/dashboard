@@ -54,23 +54,9 @@ export const authRouter = createTRPCRouter({
       return { success: "Email verified!" };
     }),
 
-  sendVerificationEmail: publicProcedure
-    .input(z.object({ token: z.string(), email: z.string() }))
-    .query(async ({ input, ctx }) => {
-      const confirmLink = `http://localhost:3000/auth/new-verification?token=${input.token}`;
-      const resend = new Resend(process.env.RESEND_API_KEY);
-
-      await resend.emails.send({
-        from: "info@drizzy.ch",
-        to: input.email,
-        subject: "Confirm your email",
-        html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
-      });
-    }),
-
-  generateVerificationToken: publicProcedure
+  sendVerificationEmailAndGenerateToken: publicProcedure
     .input(z.object({ email: z.string() }))
-    .query(async ({ ctx, input }) => {
+    .mutation(async ({ input, ctx }) => {
       const token = uuidv4();
       const expires = new Date(new Date().getTime() + 3600 * 1000);
 
@@ -86,7 +72,7 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      const verficationToken = await ctx.db.verificationToken.create({
+      await ctx.db.verificationToken.create({
         data: {
           email: input.email,
           token,
@@ -94,6 +80,16 @@ export const authRouter = createTRPCRouter({
         },
       });
 
-      return verficationToken;
+      const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+      const resend = new Resend(process.env.RESEND_API_KEY);
+
+      await resend.emails.send({
+        from: "info@drizzy.ch",
+        to: input.email,
+        subject: "Confirm your email",
+        html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
+      });
+
+      return { succes: true };
     }),
 });

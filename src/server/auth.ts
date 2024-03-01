@@ -50,12 +50,7 @@ export const {
       if (user.emailVerified) return true;
 
       if (!user.emailVerified) {
-        const verificationToken =
-          await api.auth.generateVerificationToken.query({
-            email: user.email!,
-          });
-        await api.auth.sendVerificationEmail.query({
-          token: verificationToken.token,
+        await api.auth.sendVerificationEmailAndGenerateToken.mutate({
           email: user.email!,
         });
       }
