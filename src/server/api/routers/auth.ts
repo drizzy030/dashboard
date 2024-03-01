@@ -2,7 +2,11 @@ import { TRPCError } from "@trpc/server";
 import { Resend } from "resend";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  publicProcedure,
+  ratelimit,
+} from "~/server/api/trpc";
 
 export const authRouter = createTRPCRouter({
   newVerification: publicProcedure
@@ -54,9 +58,17 @@ export const authRouter = createTRPCRouter({
       return { success: "Email verified!" };
     }),
 
-  sendVerificationEmailAndGenerateToken: publicProcedure
+  sendVerificationEmail: publicProcedure
     .input(z.object({ email: z.string() }))
     .mutation(async ({ input, ctx }) => {
+      const { success } = await ratelimit.limit(input.email);
+
+      if (!success)
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many emails sent",
+        });
+
       const token = uuidv4();
       const expires = new Date(new Date().getTime() + 3600 * 1000);
 
@@ -90,6 +102,6 @@ export const authRouter = createTRPCRouter({
         html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
       });
 
-      return { succes: true };
+      return { success: "Sent email" };
     }),
 });

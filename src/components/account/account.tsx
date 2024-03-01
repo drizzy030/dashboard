@@ -7,8 +7,8 @@ import {
   Divider,
   Input,
 } from "@nextui-org/react";
+import { Send } from "~/components/account/send";
 import { auth } from "~/server/auth";
-import { Send } from "./send";
 
 export async function Account() {
   const session = await auth();
@@ -100,7 +100,7 @@ export async function Account() {
                 </CardBody>
                 <Divider />
                 <CardFooter className="w-full justify-between">
-                  <Send email={email!} />
+                  {!session?.user.emailVerified && <Send email={email!} />}
                 </CardFooter>
               </Card>
             </div>
