@@ -61,12 +61,14 @@ export const authRouter = createTRPCRouter({
   sendVerificationEmail: publicProcedure
     .input(z.object({ email: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      const { success } = await ratelimit.limit(input.email);
+      const { success } = await ratelimit.sendVerificationEmail.limit(
+        input.email,
+      );
 
       if (!success)
         throw new TRPCError({
           code: "TOO_MANY_REQUESTS",
-          message: "Too many emails sent",
+          message: "Try again in 5 min",
         });
 
       const token = uuidv4();
