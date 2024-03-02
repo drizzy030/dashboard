@@ -1,12 +1,10 @@
 "use client";
-import { Link } from "@nextui-org/react";
 import dynamic from "next/dynamic";
 import { CardAgents } from "~/components/home/card-agents";
 import { CardBalance1 } from "~/components/home/card-balance1";
 import { CardBalance2 } from "~/components/home/card-balance2";
 import { CardBalance3 } from "~/components/home/card-balance3";
 import { CardTransactions } from "~/components/home/card-transactions";
-import { TableWrapper } from "~/components/table/table";
 
 const Chart = dynamic(
   () => import("~/components/charts/steam").then((mod) => mod.Steam),
@@ -46,17 +44,6 @@ export function Content() {
             <CardTransactions />
           </div>
         </div>
-      </div>
-
-      {/* Table Latest Users */}
-      <div className="mx-auto flex w-full max-w-[90rem] flex-col justify-center gap-3  px-4 py-5 lg:px-0">
-        <div className="flex  flex-wrap justify-between">
-          <h3 className="text-center text-xl font-semibold">Latest Users</h3>
-          <Link href="/accounts" color="primary" className="cursor-pointer">
-            View All
-          </Link>
-        </div>
-        <TableWrapper />
       </div>
     </div>
   );

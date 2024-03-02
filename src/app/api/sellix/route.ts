@@ -6,26 +6,28 @@ export async function POST(req: NextRequest) {
   const event = await req.json();
   const email = event.data.customer_email;
 
+  if (event.event !== "order:paid" || !email) {
+    return NextResponse.json({
+      status: 400,
+      message: "Invalid event or missing email",
+    });
+  }
+
   const user = await db.user.findUnique({
     where: { email },
   });
 
   if (event.event === "order:paid") {
     if (!user) {
-      return NextResponse.json({ status: 404 });
+      return NextResponse.json({ status: 404, message: "User not found" });
     }
-
-    const serial =
-      event.data.serials && event.data.serials.length > 0
-        ? event.data.serials[0]
-        : null;
 
     const product = await db.product.create({
       data: {
         shop: event.data.name,
         type: event.data.product_type,
         quantity: event.data.quantity,
-        serial: serial,
+        serial: event.data?.serials?.[0],
         title: event.data.product.title,
         description: event.data.product.description,
         price: event.data.product.price_display,
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const transaction = await db.transaction.create({
+    await db.transaction.create({
       data: {
         shop: event.data.name,
         gateway: event.data.gateway,
@@ -47,13 +49,12 @@ export async function POST(req: NextRequest) {
         productId: product.id,
       },
     });
-
-    db.user.update({
-      where: { id: user.id },
-      data: {
-        role: UserRole.CUSTOMER,
-      },
-    });
+    if (user.role !== UserRole.CUSTOMER) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { role: UserRole.CUSTOMER },
+      });
+    }
 
     return NextResponse.json({ status: 200 });
   }

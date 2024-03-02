@@ -1,3 +1,4 @@
+// NOTE: This code structure could be improved for better readability and organization.
 "use client";
 import {
   Button,

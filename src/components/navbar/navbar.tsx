@@ -1,4 +1,12 @@
-import { Link, Navbar, NavbarContent } from "@nextui-org/react";
+import {
+  BreadcrumbItem,
+  Breadcrumbs,
+  Link,
+  Navbar,
+  NavbarContent,
+} from "@nextui-org/react";
+import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { BurguerButton } from "~/components/navbar/burguer-button";
 import { NotificationsDropdown } from "~/components/navbar/notifications-dropdown";
@@ -8,6 +16,9 @@ interface Props {
   children: React.ReactNode;
 }
 export function NavbarWrapper({ children }: Props) {
+  const pathname = usePathname();
+  const pathParts = pathname.split("/").filter(Boolean);
+
   return (
     <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
       <Navbar
@@ -20,7 +31,17 @@ export function NavbarWrapper({ children }: Props) {
         <NavbarContent className="md:hidden">
           <BurguerButton />
         </NavbarContent>
-        <NavbarContent className="w-full max-md:hidden"></NavbarContent>
+        <NavbarContent className="w-full max-md:hidden">
+          <Breadcrumbs>
+            {pathParts.map((part, index) => (
+              <BreadcrumbItem key={index}>
+                <NextLink href={`/${pathParts.slice(0, index + 1).join("/")}`}>
+                  {part}
+                </NextLink>
+              </BreadcrumbItem>
+            ))}
+          </Breadcrumbs>
+        </NavbarContent>
         <NavbarContent
           justify="end"
           className="w-fit data-[justify=end]:flex-grow-0"

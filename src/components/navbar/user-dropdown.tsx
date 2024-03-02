@@ -14,12 +14,7 @@ export function UserDropdown() {
     <Dropdown>
       <NavbarItem>
         <DropdownTrigger>
-          <Avatar
-            as="button"
-            color="secondary"
-            size="md"
-            src={session.data?.user.image ?? ""}
-          />
+          <Avatar as="button" size="md" src={session.data?.user.image ?? ""} />
         </DropdownTrigger>
       </NavbarItem>
       <DropdownMenu

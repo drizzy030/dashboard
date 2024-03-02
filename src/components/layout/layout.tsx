@@ -1,6 +1,3 @@
-import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
 import { useLockedBody } from "~/components/hooks/useBodyLock";
 import { SidebarContext } from "~/components/layout/layout-context";
@@ -17,8 +14,6 @@ export function Layout({ children }: Props) {
     setSidebarOpen(!sidebarOpen);
     setLocked(!sidebarOpen);
   }
-  const pathname = usePathname();
-  const pathParts = pathname.split("/").filter(Boolean);
 
   return (
     <SidebarContext.Provider
@@ -29,22 +24,7 @@ export function Layout({ children }: Props) {
     >
       <section className="flex">
         <SidebarWrapper />
-
-        <NavbarWrapper>
-          <div className="px-5 py-4">
-            <Breadcrumbs>
-              {pathParts.map((part, index) => (
-                <BreadcrumbItem key={index}>
-                  <Link href={`/${pathParts.slice(0, index + 1).join("/")}`}>
-                    {part}
-                  </Link>
-                </BreadcrumbItem>
-              ))}
-            </Breadcrumbs>
-          </div>
-
-          {children}
-        </NavbarWrapper>
+        <NavbarWrapper>{children}</NavbarWrapper>
       </section>
     </SidebarContext.Provider>
   );
