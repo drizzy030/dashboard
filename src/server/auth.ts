@@ -2,7 +2,7 @@ import NextAuth, { DefaultSession } from "next-auth";
 import authConfig from "~/server//auth.config";
 
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { Product, UserRole } from "@prisma/client";
+import { Product, Transaction, UserRole } from "@prisma/client";
 import { db } from "~/server/db";
 import { api } from "~/trpc/server";
 
@@ -21,6 +21,7 @@ declare module "next-auth" {
       emailVerified: Date | null;
       createdAt: Date;
       products: Product[];
+      payments: Transaction[];
     } & DefaultSession["user"];
   }
 
@@ -31,6 +32,7 @@ declare module "next-auth" {
     createdAt: Date;
     emailVerified: Date | null;
     products: Product[];
+    payments: Transaction[];
   }
 }
 
@@ -67,6 +69,7 @@ export const {
           emailVerified: token.emailVerified as Date | null,
           createdAt: token.createdAt as Date,
           products: token.products as Product[],
+          payments: token.payments as Transaction[],
         },
       };
     },
@@ -88,6 +91,10 @@ export const {
         where: { userId: user.id },
       });
 
+      const payments = await db.transaction.findMany({
+        where: { userId: user.id },
+      });
+
       return {
         ...token,
         isOAuth: !!account,
@@ -95,6 +102,7 @@ export const {
         emailVerified: user.emailVerified,
         createdAt: user.createdAt,
         products,
+        payments,
       };
     },
   },

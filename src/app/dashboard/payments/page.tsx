@@ -1,4 +1,4 @@
-import { Payments } from "~/components/paymentsdev/payments";
+import { Payments } from "~/components/payments/payments";
 
 export default function Home() {
   return <Payments />;
