@@ -11,8 +11,8 @@ import {
   Pagination,
   Select,
   SelectItem,
-  Selection,
-  SortDescriptor,
+  type Selection,
+  type SortDescriptor,
   Table,
   TableBody,
   TableCell,
@@ -20,8 +20,8 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import { Transaction } from "@prisma/client";
-import React, { SVGProps } from "react";
+import {type Transaction } from "@prisma/client";
+import React, { type SVGProps } from "react";
 
 function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -99,7 +99,7 @@ export function TransactionTable({
 }: {
   transactions: Transaction[];
 }) {
-  const columns = [
+  const columns = React.useMemo(() => [
     { name: "ID", uid: "id" },
     { name: "SHOP", uid: "shop" },
     { name: "GATEWAY", uid: "gateway", sortable: true },
@@ -110,7 +110,7 @@ export function TransactionTable({
     { name: "PRICE", uid: "price" },
     { name: "CURRENCY", uid: "currency" },
     { name: "CREATEDAT", uid: "createdAt" },
-  ];
+  ], []);
   type User = (typeof transactions)[0];
 
   const [filterValue, setFilterValue] = React.useState("");
@@ -137,7 +137,7 @@ export function TransactionTable({
     return columns.filter((column) =>
       Array.from(visibleColumns).includes(column.uid),
     );
-  }, [visibleColumns]);
+  }, [visibleColumns, columns]);
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...transactions];
@@ -149,7 +149,7 @@ export function TransactionTable({
     }
 
     return filteredUsers;
-  }, [transactions, filterValue, statusFilter]);
+  }, [transactions, filterValue, hasSearchFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -302,13 +302,13 @@ export function TransactionTable({
       </div>
     );
   }, [
+    columns,
     filterValue,
-    statusFilter,
+    onClear,
     visibleColumns,
     onSearchChange,
     onRowsPerPageChange,
     transactions.length,
-    hasSearchFilter,
   ]);
 
   const bottomContent = React.useMemo(() => {
@@ -348,7 +348,7 @@ export function TransactionTable({
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [selectedKeys,  filteredItems.length,page,onNextPage, pages,onPreviousPage]);
 
   return (
     <Table

@@ -1,9 +1,35 @@
 import { UserRole } from "@prisma/client";
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { db } from "~/server/db";
 
+interface EventData {
+  customer_email: string;
+  name: string;
+  product_type: string;
+  quantity: number;
+  serials: string[];
+  gateway: string;
+  crypto_address: string;
+  crypto_amount: number;
+  crypto_confirmations_needed: number;
+  status: string;
+  product_title: string;
+  product: {
+    title: string;
+    description: string;
+    price_display: number;
+    currency: string;
+  };
+}
+
+interface Event {
+  event: string;
+  data: EventData;
+}
+
 export async function POST(req: NextRequest) {
-  const event = await req.json();
+  const event: Event = await req.json() as Event;
+
   const email = event.data.customer_email;
 
   if (event.event !== "order:paid" || !email) {

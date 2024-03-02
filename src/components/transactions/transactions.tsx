@@ -11,7 +11,7 @@ export async function Transactions() {
             <div className="mt-6 flex w-full flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <h3 className="text-xl font-semibold">Transactions</h3>
-                <TransactionTable transactions={session?.user.transactions!} />
+                <TransactionTable transactions={session?.user.transactions ?? []} />
               </div>
             </div>
           </div>

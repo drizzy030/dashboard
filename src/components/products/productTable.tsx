@@ -94,7 +94,7 @@ const INITIAL_VISIBLE_COLUMNS = [
 ];
 
 export function ProductTable({ products }: { products: Product[] }) {
-  const columns = [
+  const columns = React.useMemo(() => [
     { name: "ID", uid: "id" },
     { name: "SHOP", uid: "shop" },
     { name: "TYPE", uid: "type", sortable: true },
@@ -105,7 +105,8 @@ export function ProductTable({ products }: { products: Product[] }) {
     { name: "STATUS", uid: "status" },
     { name: "PRICE", uid: "price" },
     { name: "CREATEDAT", uid: "createdAt" },
-  ];
+], []);
+
   type User = (typeof products)[0];
 
   const [filterValue, setFilterValue] = React.useState("");
@@ -144,7 +145,7 @@ export function ProductTable({ products }: { products: Product[] }) {
     }
 
     return filteredUsers;
-  }, [products, filterValue, statusFilter, hasSearchFilter]);
+  }, [products, filterValue, hasSearchFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -298,12 +299,10 @@ export function ProductTable({ products }: { products: Product[] }) {
     );
   }, [
     filterValue,
-    statusFilter,
     visibleColumns,
     onSearchChange,
     onRowsPerPageChange,
     products.length,
-    hasSearchFilter,
     columns,
     onClear,
   ]);
@@ -347,10 +346,8 @@ export function ProductTable({ products }: { products: Product[] }) {
     );
   }, [
     selectedKeys,
-    items.length,
     page,
     pages,
-    hasSearchFilter,
     filteredItems.length,
     onNextPage,
     onPreviousPage,
