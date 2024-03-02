@@ -11,8 +11,8 @@ import {
   Pagination,
   Select,
   SelectItem,
-  Selection,
-  SortDescriptor,
+  type Selection,
+  type SortDescriptor,
   Table,
   TableBody,
   TableCell,
@@ -20,8 +20,8 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import { Product } from "@prisma/client";
-import React, { SVGProps } from "react";
+import { type Product } from "@prisma/client";
+import React, { type SVGProps } from "react";
 
 function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -132,7 +132,7 @@ export function ProductTable({ products }: { products: Product[] }) {
     return columns.filter((column) =>
       Array.from(visibleColumns).includes(column.uid),
     );
-  }, [visibleColumns]);
+  }, [visibleColumns, columns]);
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...products];
@@ -144,7 +144,7 @@ export function ProductTable({ products }: { products: Product[] }) {
     }
 
     return filteredUsers;
-  }, [products, filterValue, statusFilter]);
+  }, [products, filterValue, statusFilter, hasSearchFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -304,6 +304,8 @@ export function ProductTable({ products }: { products: Product[] }) {
     onRowsPerPageChange,
     products.length,
     hasSearchFilter,
+    columns,
+    onClear,
   ]);
 
   const bottomContent = React.useMemo(() => {
@@ -343,7 +345,16 @@ export function ProductTable({ products }: { products: Product[] }) {
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [
+    selectedKeys,
+    items.length,
+    page,
+    pages,
+    hasSearchFilter,
+    filteredItems.length,
+    onNextPage,
+    onPreviousPage,
+  ]);
 
   return (
     <Table

@@ -12,7 +12,7 @@ export async function Products() {
             <div className="mt-6 flex w-full flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <h3 className="text-xl font-semibold">Products</h3>
-                <ProductTable products={session?.user.products!} />
+                <ProductTable products={session?.user.products ?? []} />
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { cn } from "@nextui-org/react";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 
 export const Main = ({
   className,

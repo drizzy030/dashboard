@@ -1,8 +1,8 @@
-import NextAuth, { DefaultSession } from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import authConfig from "~/server/auth.config";
 
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { Product, Transaction, UserRole } from "@prisma/client";
+import { type Product, type Transaction, type UserRole } from "@prisma/client";
 import { db } from "~/server/db";
 import { api } from "~/trpc/server";
 

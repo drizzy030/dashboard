@@ -1,4 +1,4 @@
-import Chart, { Props } from "react-apexcharts";
+import Chart, { type Props } from "react-apexcharts";
 
 const state: Props["series"] = [
   {
@@ -70,7 +70,7 @@ const options: Props["options"] = {
       colors: ["red"],
     },
   },
-  // @ts-ignore
+  //@ts-expect-error: Chart ts error
   markers: false,
 };
 

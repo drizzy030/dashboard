@@ -1,7 +1,6 @@
 import type { NextAuthConfig } from "next-auth";
 import Discord from "next-auth/providers/discord";
-
-import { env } from "process";
+import { env } from "~/env";
 
 /**
  * Options for NextAuth.js used to configure providers.

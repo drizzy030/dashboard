@@ -23,7 +23,7 @@ export async function Account() {
                 <h3 className="text-xl font-semibold">Account</h3>
                 <Card className="w-full ">
                   <CardHeader className="flex gap-3">
-                    <Avatar src={session?.user.image!} radius="md" />
+                    <Avatar src={`${session?.user.image}`} radius="md" />
                     {session?.user.name}
                   </CardHeader>
                   <Divider />
@@ -42,7 +42,7 @@ export async function Account() {
                         isDisabled
                         type="text"
                         label="Name"
-                        defaultValue={session?.user.name!}
+                        defaultValue={`${session?.user.name}`}
                         className="max-w-xs"
                       />
                       <Input
@@ -50,7 +50,7 @@ export async function Account() {
                         isDisabled
                         type="email"
                         label="Email"
-                        defaultValue={session?.user.email!}
+                        defaultValue={`${session?.user.email}`}
                         className="max-w-xs"
                       />
                       <Input
