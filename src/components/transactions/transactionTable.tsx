@@ -20,7 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import {type Transaction } from "@prisma/client";
+import { type Transaction } from "@prisma/client";
 import React, { type SVGProps } from "react";
 
 function capitalize(str: string) {
@@ -99,18 +99,24 @@ export function TransactionTable({
 }: {
   transactions: Transaction[];
 }) {
-  const columns = React.useMemo(() => [
-    { name: "ID", uid: "id" },
-    { name: "SHOP", uid: "shop" },
-    { name: "GATEWAY", uid: "gateway", sortable: true },
-    { name: "CRYPTO_ADRESS", uid: "crypto_address" },
-    { name: "CRYPTO_AMOUNT", uid: "crypto_amount" },
-    { name: "CRYPTO_CONFIRMATION_NEEDED", uid: "crypto_confirmations_needed" },
-    { name: "STATUS", uid: "status" },
-    { name: "PRICE", uid: "price" },
-    { name: "CURRENCY", uid: "currency" },
-    { name: "CREATEDAT", uid: "createdAt" },
-  ], []);
+  const columns = React.useMemo(
+    () => [
+      { name: "ID", uid: "id" },
+      { name: "SHOP", uid: "shop" },
+      { name: "GATEWAY", uid: "gateway", sortable: true },
+      { name: "CRYPTO_ADRESS", uid: "crypto_address" },
+      { name: "CRYPTO_AMOUNT", uid: "crypto_amount" },
+      {
+        name: "CRYPTO_CONFIRMATION_NEEDED",
+        uid: "crypto_confirmations_needed",
+      },
+      { name: "STATUS", uid: "status" },
+      { name: "PRICE", uid: "price" },
+      { name: "CURRENCY", uid: "currency" },
+      { name: "CREATEDAT", uid: "createdAt" },
+    ],
+    [],
+  );
   type User = (typeof transactions)[0];
 
   const [filterValue, setFilterValue] = React.useState("");
@@ -348,7 +354,14 @@ export function TransactionTable({
         </div>
       </div>
     );
-  }, [selectedKeys,  filteredItems.length,page,onNextPage, pages,onPreviousPage]);
+  }, [
+    selectedKeys,
+    filteredItems.length,
+    page,
+    onNextPage,
+    pages,
+    onPreviousPage,
+  ]);
 
   return (
     <Table

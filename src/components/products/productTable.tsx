@@ -94,18 +94,21 @@ const INITIAL_VISIBLE_COLUMNS = [
 ];
 
 export function ProductTable({ products }: { products: Product[] }) {
-  const columns = React.useMemo(() => [
-    { name: "ID", uid: "id" },
-    { name: "SHOP", uid: "shop" },
-    { name: "TYPE", uid: "type", sortable: true },
-    { name: "QUANTITY", uid: "quantity" },
-    { name: "SERIAL", uid: "serial" },
-    { name: "TITLE", uid: "title" },
-    { name: "DESCRIPTION", uid: "description" },
-    { name: "STATUS", uid: "status" },
-    { name: "PRICE", uid: "price" },
-    { name: "CREATEDAT", uid: "createdAt" },
-], []);
+  const columns = React.useMemo(
+    () => [
+      { name: "ID", uid: "id" },
+      { name: "SHOP", uid: "shop" },
+      { name: "TYPE", uid: "type", sortable: true },
+      { name: "QUANTITY", uid: "quantity" },
+      { name: "SERIAL", uid: "serial" },
+      { name: "TITLE", uid: "title" },
+      { name: "DESCRIPTION", uid: "description" },
+      { name: "STATUS", uid: "status" },
+      { name: "PRICE", uid: "price" },
+      { name: "CREATEDAT", uid: "createdAt" },
+    ],
+    [],
+  );
 
   type User = (typeof products)[0];
 

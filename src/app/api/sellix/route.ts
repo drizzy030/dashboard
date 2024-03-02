@@ -28,7 +28,7 @@ interface Event {
 }
 
 export async function POST(req: NextRequest) {
-  const event: Event = await req.json() as Event;
+  const event: Event = (await req.json()) as Event;
 
   const email = event.data.customer_email;
 
