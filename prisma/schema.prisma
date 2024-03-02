@@ -101,6 +101,7 @@ model Transaction {
     crypto_amount               Float?
     crypto_confirmations_needed Int?
     status                      String
+    title                       String
     price                       Float
     currency                    String
     createdAt                   DateTime @default(now())

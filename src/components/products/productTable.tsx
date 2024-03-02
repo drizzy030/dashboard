@@ -93,7 +93,7 @@ const INITIAL_VISIBLE_COLUMNS = [
   "status",
 ];
 
-export function ProductsTable({ products }: { products: Product[] }) {
+export function ProductTable({ products }: { products: Product[] }) {
   const columns = [
     { name: "ID", uid: "id" },
     { name: "SHOP", uid: "shop" },
@@ -102,8 +102,8 @@ export function ProductsTable({ products }: { products: Product[] }) {
     { name: "SERIAL", uid: "serial" },
     { name: "TITLE", uid: "title" },
     { name: "DESCRIPTION", uid: "description" },
-    { name: "PRICE", uid: "price" },
     { name: "STATUS", uid: "status" },
+    { name: "PRICE", uid: "price" },
     { name: "CREATEDAT", uid: "createdAt" },
   ];
   type User = (typeof products)[0];

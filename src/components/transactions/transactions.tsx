@@ -1,5 +1,5 @@
+import { TransactionTable } from "~/components/transactions/transactionTable";
 import { auth } from "~/server/auth";
-// import { PaymentTable } from "./transactionTable";
 
 export async function Transactions() {
   const session = await auth();
@@ -11,7 +11,7 @@ export async function Transactions() {
             <div className="mt-6 flex w-full flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <h3 className="text-xl font-semibold">Transactions</h3>
-                {/* <PaymentTable payments={session?.user.transactions!} /> */}
+                <TransactionTable transactions={session?.user.transactions!} />
               </div>
             </div>
           </div>

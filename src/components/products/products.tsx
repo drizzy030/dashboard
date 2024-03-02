@@ -1,4 +1,4 @@
-import { ProductsTable } from "~/components/products/productTable";
+import { ProductTable } from "~/components/products/productTable";
 import { auth } from "~/server/auth";
 
 export async function Products() {
@@ -12,7 +12,7 @@ export async function Products() {
             <div className="mt-6 flex w-full flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <h3 className="text-xl font-semibold">Products</h3>
-                <ProductsTable products={session?.user.products!} />
+                <ProductTable products={session?.user.products!} />
               </div>
             </div>
           </div>

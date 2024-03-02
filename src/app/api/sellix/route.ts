@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
         crypto_amount: event.data.crypto_amount,
         crypto_confirmations_needed: event.data.crypto_confirmations_needed,
         status: event.data.status,
+        title: event.data.product.title,
         price: event.data.product.price_display,
         currency: event.data.product.currency,
         userId: user.id,
