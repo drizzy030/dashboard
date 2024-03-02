@@ -78,7 +78,7 @@ export function SidebarWrapper() {
               name={session.data?.user.name}
               description={session.data?.user.email}
               avatarProps={{
-                src: `${session.data?.user.image}`,
+                src: session.data?.user.image!,
               }}
             />
           </div>
