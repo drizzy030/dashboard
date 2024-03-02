@@ -167,6 +167,7 @@ export function TransactionTable({
     switch (columnKey) {
       case "status":
         return (
+          // NOTE: Its succes only otherwise it wont be in the db
           <Chip
             startContent={
               <svg
@@ -234,7 +235,7 @@ export function TransactionTable({
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
+            placeholder="Search by shopname..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
