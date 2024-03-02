@@ -83,7 +83,16 @@ const ChevronDownIcon = ({
   </svg>
 );
 
-const INITIAL_VISIBLE_COLUMNS = ["shop", "gateway"];
+const INITIAL_VISIBLE_COLUMNS = [
+  "shop",
+  "gateway",
+  "crypto_address",
+  "crypto_amount",
+  "status",
+  "price",
+  "currency",
+  "createdAt",
+];
 
 export function TransactionTable({
   transactions,

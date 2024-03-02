@@ -1,6 +1,5 @@
 "use client";
 import dynamic from "next/dynamic";
-import { CardAgents } from "~/components/home/card-agents";
 import { CardBalance1 } from "~/components/home/card-balance1";
 import { CardBalance2 } from "~/components/home/card-balance2";
 import { CardBalance3 } from "~/components/home/card-balance3";
@@ -40,7 +39,6 @@ export function Content() {
         <div className="mt-4 flex w-full flex-col gap-2 xl:max-w-md">
           <h3 className="text-xl font-semibold">Section</h3>
           <div className="flex flex-col flex-wrap justify-center gap-4 md:flex-col md:flex-nowrap">
-            <CardAgents />
             <CardTransactions />
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Avatar, Card, CardBody } from "@nextui-org/react";
+import { useSession } from "next-auth/react";
 
 const items = [
   {
@@ -34,6 +35,7 @@ const items = [
 ];
 
 export function CardTransactions() {
+  const session = useSession();
   return (
     <Card className=" rounded-xl bg-default-50 px-3 shadow-md">
       <CardBody className="gap-4 py-5">
@@ -46,24 +48,25 @@ export function CardTransactions() {
         </div>
 
         <div className="flex flex-col gap-6 ">
-          {items.map((item) => (
-            <div key={item.name} className="grid w-full grid-cols-4">
+          {session.data?.user.transactions.map((item) => (
+            <div key={item.id} className="grid w-full grid-cols-4">
               <div className="w-full">
                 <Avatar
                   isBordered
                   color="secondary"
-                  src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                  src={session.data.user.image!}
                 />
               </div>
-
               <span className="font-semibold  text-default-900">
-                {item.name}
+                {item.title}
               </span>
               <div>
-                <span className="text-xs text-success">{item.amount}</span>
+                <span className="text-xs text-success">{item.price}</span>
               </div>
               <div>
-                <span className="text-xs text-default-500">{item.date}</span>
+                <span className="text-xs text-default-500">
+                  {item.createdAt.toString()}
+                </span>
               </div>
             </div>
           ))}
