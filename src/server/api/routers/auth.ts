@@ -75,7 +75,7 @@ export const authRouter = createTRPCRouter({
       const token = uuidv4();
       const expires = new Date(new Date().getTime() + 3600 * 1000);
 
-      const existingToken = await ctx.db.verificationToken.findFirst({
+      const existingToken = await ctx.db.verificationToken.findUnique({
         where: { email: input.email },
       });
 
