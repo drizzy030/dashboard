@@ -1,5 +1,5 @@
 import NextAuth, { DefaultSession } from "next-auth";
-import authConfig from "~/server//auth.config";
+import authConfig from "~/server/auth.config";
 
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { Product, Transaction, UserRole } from "@prisma/client";
@@ -21,7 +21,7 @@ declare module "next-auth" {
       emailVerified: Date | null;
       createdAt: Date;
       products: Product[];
-      payments: Transaction[];
+      transactions: Transaction[];
     } & DefaultSession["user"];
   }
 
@@ -32,7 +32,7 @@ declare module "next-auth" {
     createdAt: Date;
     emailVerified: Date | null;
     products: Product[];
-    payments: Transaction[];
+    transactions: Transaction[];
   }
 }
 
@@ -48,7 +48,7 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user }) {
       if (user.emailVerified) return true;
 
       if (!user.emailVerified) {
@@ -58,7 +58,7 @@ export const {
       }
       return true;
     },
-    async session({ session, user, token, newSession, trigger }) {
+    async session({ session, token }) {
       return {
         ...session,
         user: {
@@ -69,12 +69,12 @@ export const {
           emailVerified: token.emailVerified as Date | null,
           createdAt: token.createdAt as Date,
           products: token.products as Product[],
-          payments: token.payments as Transaction[],
+          transactions: token.transactions as Transaction[],
         },
       };
     },
 
-    async jwt({ token, profile, session, trigger, isNewUser }) {
+    async jwt({ token }) {
       if (!token.sub) return token;
 
       const user = await db.user.findUnique({
@@ -91,7 +91,7 @@ export const {
         where: { userId: user.id },
       });
 
-      const payments = await db.transaction.findMany({
+      const transactions = await db.transaction.findMany({
         where: { userId: user.id },
       });
 
@@ -102,7 +102,7 @@ export const {
         emailVerified: user.emailVerified,
         createdAt: user.createdAt,
         products,
-        payments,
+        transactions,
       };
     },
   },

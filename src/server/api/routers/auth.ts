@@ -4,12 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 import {
   createTRPCRouter,
+  protectedProcedure,
   publicProcedure,
   ratelimit,
 } from "~/server/api/trpc";
 
 export const authRouter = createTRPCRouter({
-  newVerification: publicProcedure
+  newVerification: protectedProcedure
     .input(z.object({ token: z.string() }))
     .mutation(async ({ input, ctx }) => {
       const token = await ctx.db.verificationToken.findUnique({

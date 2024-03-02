@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/react";
 import { toast } from "sonner";
 import { api } from "~/trpc/react";
 
-export function AccountSend({ email }: { email: string }) {
+export function AccountVerificationSend({ email }: { email: string }) {
   const {
     mutate: sendVerificationEmail,
     isLoading: sendVerificationEmailIsLoading,

@@ -13,7 +13,9 @@ export default function DashboardLayout({
 }) {
   return (
     <section>
-      <DashboardProvider>{children}</DashboardProvider>
+      <main>
+        <DashboardProvider>{children}</DashboardProvider>
+      </main>
     </section>
   );
 }

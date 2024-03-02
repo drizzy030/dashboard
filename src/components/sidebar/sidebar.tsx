@@ -50,10 +50,10 @@ export function SidebarWrapper() {
                 href="/dashboard/account"
               />
               <SidebarItem
-                isActive={pathname === "/dashboard/payments"}
-                title="Payments"
+                isActive={pathname === "/dashboard/transactions"}
+                title="Transactions"
                 icon={<PaymentsIcon />}
-                href="/dashboard/payments"
+                href="/dashboard/transactions"
               />
 
               <SidebarItem

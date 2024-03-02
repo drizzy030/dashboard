@@ -7,7 +7,7 @@ import {
   Divider,
   Input,
 } from "@nextui-org/react";
-import { AccountSend } from "~/components/account/accountSend";
+import { AccountVerificationSend } from "~/components/account/accountVerificationSend";
 import { auth } from "~/server/auth";
 
 export async function Account() {
@@ -102,7 +102,7 @@ export async function Account() {
                   <Divider />
                   <CardFooter className="w-full justify-between">
                     {!session?.user.emailVerified && (
-                      <AccountSend email={email!} />
+                      <AccountVerificationSend email={email!} />
                     )}
                   </CardFooter>
                 </Card>

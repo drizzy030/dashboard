@@ -1,4 +1,4 @@
-import { Input, Link, Navbar, NavbarContent } from "@nextui-org/react";
+import { Link, Navbar, NavbarContent } from "@nextui-org/react";
 import React from "react";
 import { BurguerButton } from "~/components/navbar/burguer-button";
 import { NotificationsDropdown } from "~/components/navbar/notifications-dropdown";
@@ -20,14 +20,7 @@ export function NavbarWrapper({ children }: Props) {
         <NavbarContent className="md:hidden">
           <BurguerButton />
         </NavbarContent>
-        <NavbarContent className="w-full max-md:hidden">
-          <Input
-            isClearable
-            variant="underlined"
-            size="sm"
-            placeholder="Search..."
-          />
-        </NavbarContent>
+        <NavbarContent className="w-full max-md:hidden"></NavbarContent>
         <NavbarContent
           justify="end"
           className="w-fit data-[justify=end]:flex-grow-0"
