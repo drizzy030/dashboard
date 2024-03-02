@@ -13,6 +13,7 @@ import { useState } from "react";
 
 export function ProductTable({ products }: { products: Product[] }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [showSerials, setShowSerials] = useState(false);
 
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -38,7 +39,7 @@ export function ProductTable({ products }: { products: Product[] }) {
           <TableColumn>SERIALS</TableColumn>
           <TableColumn>CREATED AT</TableColumn>
         </TableHeader>
-        <TableBody emptyContent={"No products."}>
+        <TableBody emptyContent="No products.">
           {filteredProducts.map((product) => (
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
@@ -48,7 +49,15 @@ export function ProductTable({ products }: { products: Product[] }) {
               <TableCell>{product.price}</TableCell>
               <TableCell>{product.quantity}</TableCell>
               <TableCell>{product.type}</TableCell>
-              <TableCell>{product.serial}</TableCell>
+              <TableCell>
+                <button onClick={() => setShowSerials(!showSerials)}>
+                  {showSerials ? (
+                    `${product.serial ? product.serial : "No serial found"}`
+                  ) : (
+                    <div className="h-6 w-12 rounded-md bg-[#1e1f22]"></div>
+                  )}
+                </button>
+              </TableCell>
               <TableCell>{product.createdAt.toLocaleString()}</TableCell>
             </TableRow>
           ))}

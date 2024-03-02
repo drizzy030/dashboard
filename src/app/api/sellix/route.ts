@@ -10,19 +10,22 @@ export async function POST(req: NextRequest) {
     where: { email },
   });
 
-  if (event.event !== "order:paid") return NextResponse.json({ status: 404 });
-  console.log(event.event);
   if (event.event === "order:paid") {
     if (!user) {
       return NextResponse.json({ status: 404 });
     }
+
+    const serial =
+      event.data.serials && event.data.serials.length > 0
+        ? event.data.serials[0]
+        : null;
 
     const product = await db.product.create({
       data: {
         shop: event.data.name,
         type: event.data.product_type,
         quantity: event.data.quantity,
-        serial: event.data.serials[0],
+        serial: serial,
         title: event.data.product.title,
         description: event.data.product.description,
         price: event.data.product.price_display,

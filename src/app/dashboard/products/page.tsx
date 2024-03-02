@@ -1,4 +1,4 @@
-import { Products } from "~/components/productsdev/products";
+import { Products } from "~/components/products/products";
 
 export default function Home() {
   return <Products />;
