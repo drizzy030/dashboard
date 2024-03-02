@@ -1,41 +1,8 @@
 import { Avatar, Card, CardBody } from "@nextui-org/react";
-import { useSession } from "next-auth/react";
+import { auth } from "~/server/auth";
 
-const items = [
-  {
-    name: "Jose Perez",
-    picture: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    amount: "4500 USD",
-    date: "9/20/2021",
-  },
-  {
-    name: "Jose Perez",
-    picture: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    amount: "4500 USD",
-    date: "9/20/2021",
-  },
-  {
-    name: "Jose Perez",
-    picture: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    amount: "4500 USD",
-    date: "9/20/2021",
-  },
-  {
-    name: "Jose Perez",
-    picture: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    amount: "4500 USD",
-    date: "9/20/2021",
-  },
-  {
-    name: "Jose Perez",
-    picture: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    amount: "4500 USD",
-    date: "9/20/2021",
-  },
-];
-
-export function CardTransactions() {
-  const session = useSession();
+export async function CardTransactions() {
+  const session = await auth();
   return (
     <Card className=" rounded-xl bg-default-50 px-3 shadow-md">
       <CardBody className="gap-4 py-5">
@@ -48,24 +15,26 @@ export function CardTransactions() {
         </div>
 
         <div className="flex flex-col gap-6 ">
-          {session.data?.user.transactions.map((item) => (
+          {session?.user.transactions.map((item) => (
             <div key={item.id} className="grid w-full grid-cols-4">
               <div className="w-full">
                 <Avatar
                   isBordered
                   color="secondary"
-                  src={session.data.user.image!}
+                  src={session?.user.image!}
                 />
               </div>
               <span className="font-semibold  text-default-900">
                 {item.title}
               </span>
               <div>
-                <span className="text-xs text-success">{item.price}</span>
+                <span className="text-sm text-success">
+                  {item.price} {item.currency}
+                </span>
               </div>
               <div>
-                <span className="text-xs text-default-500">
-                  {item.createdAt.toString()}
+                <span className="text-sm text-default-500">
+                  {new Date(item.createdAt).toLocaleDateString()}
                 </span>
               </div>
             </div>

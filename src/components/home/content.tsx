@@ -1,16 +1,9 @@
-"use client";
-import dynamic from "next/dynamic";
-import { CardBalance1 } from "~/components/home/card-balance1";
-import { CardBalance2 } from "~/components/home/card-balance2";
-import { CardBalance3 } from "~/components/home/card-balance3";
+import { Chart } from "~/components/charts/chart";
+import { CardExpenditure2 } from "~/components/home/card-expenditure2";
+import { CardProducts1 } from "~/components/home/card-products1";
 import { CardTransactions } from "~/components/home/card-transactions";
+import { CardTransactions3 } from "~/components/home/card-transactions3";
 
-const Chart = dynamic(
-  () => import("~/components/charts/steam").then((mod) => mod.Steam),
-  {
-    ssr: false,
-  },
-);
 export function Content() {
   return (
     <div className="h-full lg:px-6">
@@ -20,13 +13,12 @@ export function Content() {
           <div className="flex flex-col gap-2">
             <h3 className="text-xl font-semibold">Available Balance</h3>
             <div className="grid w-full grid-cols-1 justify-center gap-5  md:grid-cols-2 2xl:grid-cols-3">
-              <CardBalance1 />
-              <CardBalance2 />
-              <CardBalance3 />
+              <CardProducts1 />
+              <CardExpenditure2 />
+              <CardTransactions3 />
             </div>
           </div>
-
-          {/* Chart */}
+          Chart
           <div className="flex h-full flex-col gap-2">
             <h3 className="text-xl font-semibold">Statistics</h3>
             <div className="w-full rounded-2xl bg-default-50 p-6 shadow-lg ">
