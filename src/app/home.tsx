@@ -15,7 +15,7 @@ export function HomePage() {
       <TypeAnimation
         repeat={Infinity}
         className="lg:text:3xl text-3xl  font-bold xl:text-5xl"
-        speed={30}
+        speed={20}
         sequence={[
           "Dashboard Based On ",
           () => setTextColor("#6A3CE2"),

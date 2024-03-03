@@ -15,7 +15,8 @@ export const metadata = {
   title: "Drizzy",
   description: "Made by drizzy",
   openGraph: {
-    images: "https://photos.sphereshowcase.com/tBJczsgyzUAP3woETDr31.jpg",
+    images:
+      "https://media.discordapp.net/attachments/1201233417090637976/1213954284966641714/image.png?ex=65f75a07&is=65e4e507&hm=e2d35f5b04dc8ba04e9c441fcdab9f6d7b86db5dcc0d73d637bf1db9555eb7ff&=&format=webp&quality=lossless&width=1320&height=671",
   },
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
