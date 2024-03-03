@@ -11,14 +11,14 @@ import {
   Pagination,
   Select,
   SelectItem,
-  type Selection,
-  type SortDescriptor,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
+  type Selection,
+  type SortDescriptor,
 } from "@nextui-org/react";
 import { type Product } from "@prisma/client";
 import React, { type SVGProps } from "react";
@@ -119,7 +119,6 @@ export function ProductTable({ products }: { products: Product[] }) {
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
-  const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: "price",
@@ -243,7 +242,7 @@ export function ProductTable({ products }: { products: Product[] }) {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
+            placeholder="Search by title..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}

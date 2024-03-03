@@ -11,7 +11,7 @@ export function Content() {
         <div className="mt-6 flex w-full flex-col gap-6">
           {/* Card Section Top */}
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-semibold">Available Balance</h3>
+            <h3 className="text-xl font-semibold">Stats</h3>
             <div className="grid w-full grid-cols-1 justify-center gap-5  md:grid-cols-2 2xl:grid-cols-3">
               <CardProducts1 />
               <CardExpenditure2 />
@@ -29,7 +29,7 @@ export function Content() {
 
         {/* Left Section */}
         <div className="mt-4 flex w-full flex-col gap-2 xl:max-w-md">
-          <h3 className="text-xl font-semibold">Section</h3>
+          <h3 className="text-xl font-semibold">Tansactions</h3>
           <div className="flex flex-col flex-wrap justify-center gap-4 md:flex-col md:flex-nowrap">
             <CardTransactions />
           </div>

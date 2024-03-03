@@ -11,14 +11,14 @@ import {
   Pagination,
   Select,
   SelectItem,
-  type Selection,
-  type SortDescriptor,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
+  type Selection,
+  type SortDescriptor,
 } from "@nextui-org/react";
 import { type Transaction } from "@prisma/client";
 import React, { type SVGProps } from "react";
@@ -126,7 +126,6 @@ export function TransactionTable({
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
-  const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: "price",
@@ -182,7 +181,7 @@ export function TransactionTable({
     switch (columnKey) {
       case "status":
         return (
-          // NOTE: Its succes only otherwise it wont be in the db
+          // NOTE: Its always success otherwise it wont be in the db you can make created or peding transactions by modifying the sellix webhook api
           <Chip
             startContent={
               <svg

@@ -20,7 +20,7 @@ export async function CardTransactions() {
               <div className="w-full">
                 <Avatar
                   isBordered
-                  color="secondary"
+                  color="default"
                   src={`${session?.user.image}`}
                 />
               </div>
