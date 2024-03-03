@@ -15,7 +15,7 @@ export async function CardTransactions() {
         </div>
 
         <div className="flex flex-col gap-6 ">
-          {!(session?.user.transactions.length! > 0) && (
+          {!(session?.user.transactions.length ?? 0 > 0) && (
             <div className="flex items-center justify-center text-default-300">
               No transactions
             </div>
