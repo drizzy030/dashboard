@@ -17,5 +17,5 @@ export default {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [nextui(), require("tailwindcss-dotted-background")],
 } satisfies Config;

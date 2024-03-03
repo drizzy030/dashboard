@@ -25,8 +25,8 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <SessionProvider session={session}>
-      <html lang="en">
-        <body className={`font-sans ${inter.variable}`}>
+      <html lang="en" className="dark">
+        <body className={`font-sans ${inter.variable} `}>
           <TRPCReactProvider>
             <Toaster />
             {children}
