@@ -1,4 +1,5 @@
-import { Button, Image } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import Image from "next/image";
 import Link from "next/link";
 import { Main } from "~/app/_components/main";
 import { HomePage } from "./home";
@@ -7,8 +8,8 @@ export default function Home() {
   return (
     <section>
       <div className="relative flex w-full items-center justify-center">
-        <div className="fixed inset-x-0 top-2 z-50 mx-auto max-w-2xl">
-          <nav className="boder shadow-input relative flex items-center justify-center space-x-4 rounded-full border border-black/[0.2] bg-white px-8 py-3 dark:border-white/[0.2] dark:bg-black ">
+        <div className="fixed inset-x-0 top-2 z-50 mx-auto max-w-[15rem]">
+          <nav className="boder shadow-input relative flex items-center justify-center space-x-2 rounded-full border border-black/[0.2] bg-white px-8 py-3 dark:border-white/[0.2] dark:bg-black ">
             <svg
               fill="#fff"
               height="20pt"
@@ -78,7 +79,9 @@ export default function Home() {
               />
             </svg>{" "}
             <Image
-              width={"20pt"}
+              width={"20"}
+              alt=""
+              height={"20"}
               src="https://media.discordapp.net/attachments/1201233417090637976/1213947556275556403/logo-sm.png?ex=65f753c3&is=65e4dec3&hm=de2954af0bc7ed10a340096a98d8c19a9e7b2967c610e293436f3fa4eed0a798&=&format=webp&quality=lossless&width=317&height=350"
             />
           </nav>
