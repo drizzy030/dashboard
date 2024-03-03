@@ -64,14 +64,14 @@ export function SidebarWrapper() {
               />
             </SidebarMenu>
 
-            <SidebarMenu title="Updates">
+            {/* <SidebarMenu title="Updates">
               <SidebarItem
                 isActive={pathname === "/dashboard/changelog"}
                 title="Changelog"
                 icon={<ChangeLogIcon />}
                 href="/dashboard/changelog"
               />
-            </SidebarMenu>
+            </SidebarMenu> */}
           </div>
           <div className={Sidebar.Footer()}>
             <User
