@@ -18,7 +18,7 @@ export default function Home() {
       </div>
       <Main className="bg-dotted-spacing-4 bg-dotted-gray-900">
         <p className="text-xs text-neutral-600 sm:text-base dark:text-neutral-200">
-          Hello, I'm Drizzy. A dev from germany.
+          Hello, Im Drizzy. A dev from germany.
         </p>
         <div className="my-6 flex space-x-1">
           <div
