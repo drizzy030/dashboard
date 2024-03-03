@@ -8,6 +8,7 @@ import {
   publicProcedure,
   ratelimit,
 } from "~/server/api/trpc";
+import { getBaseUrl } from "~/trpc/shared";
 
 export const authRouter = createTRPCRouter({
   newVerification: protectedProcedure
@@ -95,7 +96,7 @@ export const authRouter = createTRPCRouter({
         },
       });
 
-      const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+      const confirmLink = `${getBaseUrl()}/auth/new-verification?token=${token}`;
       const resend = new Resend(process.env.RESEND_API_KEY);
 
       await resend.emails.send({
