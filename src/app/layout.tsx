@@ -13,10 +13,11 @@ const inter = Inter({
 
 export const metadata = {
   title: "Drizzy",
+  themeColor: "#6A3CE2",
   description: "Made by drizzy",
   openGraph: {
     images:
-      "https://media.discordapp.net/attachments/1201233417090637976/1213954284966641714/image.png?ex=65f75a07&is=65e4e507&hm=e2d35f5b04dc8ba04e9c441fcdab9f6d7b86db5dcc0d73d637bf1db9555eb7ff&=&format=webp&quality=lossless&width=1320&height=671",
+      "https://media.discordapp.net/attachments/1201233417090637976/1213955173983195259/image.png?ex=65f75adb&is=65e4e5db&hm=6c74148197e80e6c33db50b0f393ade5ef6e8fffc549bec8967fa48a26d93bca&=&format=webp&quality=lossless",
   },
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
