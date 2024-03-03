@@ -15,6 +15,12 @@ export async function CardTransactions() {
         </div>
 
         <div className="flex flex-col gap-6 ">
+          {!(session?.user.transactions.length! > 0) && (
+            <div className="flex items-center justify-center text-default-300">
+              No transactions
+            </div>
+          )}
+
           {session?.user.transactions.map((item) => (
             <div key={item.id} className="grid w-full grid-cols-4">
               <div className="w-full">

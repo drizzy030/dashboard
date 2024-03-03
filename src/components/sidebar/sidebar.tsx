@@ -73,15 +73,7 @@ export function SidebarWrapper() {
               />
             </SidebarMenu> */}
           </div>
-          <div className={Sidebar.Footer()}>
-            <User
-              name={session.data?.user.name}
-              description={session.data?.user.email}
-              avatarProps={{
-                src: `${session.data?.user.image}`,
-              }}
-            />
-          </div>
+          <div className={Sidebar.Footer()}></div>
         </div>
       </div>
     </aside>
