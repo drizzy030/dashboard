@@ -17,9 +17,9 @@ export function HomePage() {
         className="lg:text:3xl text-3xl  font-bold xl:text-5xl"
         sequence={[
           "Dashboard Based On ",
-          () => [],
-          "Sellix",
           () => setTextColor("#6A3CE2"),
+          "Sellix",
+          () => setTextColor("#fff"),
         ]}
       />
     </div>
