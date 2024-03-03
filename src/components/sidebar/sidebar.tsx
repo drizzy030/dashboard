@@ -1,8 +1,8 @@
-import { User } from "@nextui-org/react";
+import { Button, Card, CardFooter, Image } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { toast } from "sonner";
 import { AccountsIcon } from "~/components/icons/sidebar/accounts-icon";
-import { ChangeLogIcon } from "~/components/icons/sidebar/changelog-icon";
 import { HomeIcon } from "~/components/icons/sidebar/home-icon";
 import { PaymentsIcon } from "~/components/icons/sidebar/payments-icon";
 import { ProductsIcon } from "~/components/icons/sidebar/products-icon";
@@ -11,11 +11,22 @@ import { CompaniesDropdown } from "~/components/sidebar/companies-dropdown";
 import { SidebarItem } from "~/components/sidebar/sidebar-item";
 import { SidebarMenu } from "~/components/sidebar/sidebar-menu";
 import { Sidebar } from "~/components/sidebar/sidebar.styles";
+import { api } from "~/trpc/react";
 
 export function SidebarWrapper() {
   const pathname = usePathname();
   const { collapsed, setCollapsed } = useSidebarContext();
-
+  const {
+    mutate: sendVerificationEmail,
+    isLoading: sendVerificationEmailIsLoading,
+  } = api.auth.sendVerificationEmail.useMutation({
+    onSuccess: ({ success }) => {
+      toast.success(success);
+    },
+    onError(error) {
+      toast.error(error.message);
+    },
+  });
   const session = useSession();
   return (
     <aside className="sticky top-0 z-[202] h-screen">
@@ -72,6 +83,35 @@ export function SidebarWrapper() {
                 href="/dashboard/changelog"
               />
             </SidebarMenu> */}
+            {!session.data?.user.emailVerified && (
+              <Card isFooterBlurred radius="lg" className="border-none">
+                <Image
+                  alt="Woman listing to music"
+                  className="object-cover"
+                  height={50}
+                  src="/images/hero-card.jpeg"
+                  width={50}
+                />
+                <CardFooter className="absolute bottom-1 z-10 ml-1 w-[calc(100%_-_8px)] justify-between overflow-hidden rounded-large border-1 border-white/20 py-1 shadow-small before:rounded-xl before:bg-white/10">
+                  <p className="text-tiny text-white/80">⚠️</p>
+                  <Button
+                    className="bg-black/20 text-tiny text-white"
+                    variant="flat"
+                    color="default"
+                    radius="lg"
+                    isLoading={sendVerificationEmailIsLoading}
+                    size="sm"
+                    onClick={() =>
+                      sendVerificationEmail({
+                        email: session.data?.user.email ?? "",
+                      })
+                    }
+                  >
+                    Verify your email!
+                  </Button>
+                </CardFooter>
+              </Card>
+            )}
           </div>
           <div className={Sidebar.Footer()}></div>
         </div>
