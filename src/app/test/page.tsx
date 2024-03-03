@@ -1,10 +1,4 @@
-"use client"
-const Test = () => {
-  return (
-    <section>
-      <main>Test</main>
-    </section>
-  );
+const Page = () => {
+  return <div>About</div>;
 };
-
-export default Test;
+export default Page;
