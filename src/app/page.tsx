@@ -120,6 +120,13 @@ export default function Home() {
           >
             Sellix
           </Button>
+          <Button
+            as={Link}
+            href="https://github.com/drizzy030/dashboard"
+            radius="sm"
+          >
+            Github
+          </Button>
         </div>
       </Main>
     </section>
