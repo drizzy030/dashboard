@@ -1,12 +1,14 @@
+import { useRouter } from "next/navigation";
 import { ProductTable } from "~/components/products/productTable";
 import { auth } from "~/server/auth";
 import { api } from "~/trpc/server";
 
 export async function Products() {
   const session = await auth();
-
+  const router = useRouter();
   if (!session?.user.transactions.length) {
     await api.product.createStartProduct.mutate();
+    router.refresh();
   }
 
   return (
