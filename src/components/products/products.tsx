@@ -1,4 +1,3 @@
-import { toast } from "sonner";
 import { ProductTable } from "~/components/products/productTable";
 import { auth } from "~/server/auth";
 import { api } from "~/trpc/server";
@@ -7,7 +6,6 @@ export async function Products() {
   const session = await auth();
   if (!session?.user.transactions.length) {
     await api.product.createStartProduct.mutate();
-    toast.success("Please refresh the site");
   }
 
   return (
