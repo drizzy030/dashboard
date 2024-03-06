@@ -49,36 +49,6 @@ export const {
 } = NextAuth({
   callbacks: {
     async signIn({ user }) {
-      if (user.products.length < 0 || user.transactions.length < 0) {
-        const product = await db.product.create({
-          data: {
-            shop: "Test Shop",
-            type: "SERIALS",
-            quantity: 1,
-            serial: "DRIZZY-HGF645",
-            title: "Spoofer 1 day",
-            description: "1 day of the void spoofer",
-            price: 10,
-            userId: user.id!,
-          },
-        });
-        await db.transaction.create({
-          data: {
-            shop: "Test Shop",
-            gateway: "LITECOIN",
-            crypto_address: "ltc1qaclv0vtss45nmfxtt2c6qdndzl70cfh6uslx9e",
-            crypto_amount: 0.012,
-            crypto_confirmations_needed: 3,
-            status: "CONFIRMED",
-            title: "Spoofer 1 day",
-            price: 10,
-            currency: "USD",
-            userId: user.id!,
-            productId: product.id,
-          },
-        });
-      }
-
       if (user.emailVerified) return true;
 
       if (!user.emailVerified) {
