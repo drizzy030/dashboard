@@ -21,7 +21,7 @@ export async function Transactions() {
                 <TransactionTable
                   transactions={session?.user.transactions ?? []}
                 />
-              </div>
+              </div> 
             </div>
           </div>
         </div>
