@@ -1,5 +1,6 @@
-import { DashboardHome } from "~/components/home/dashboardHome";
+// TODO
+import { Content } from "~/components/home/content";
 
 export default function Home() {
-  return <DashboardHome />;
+  return <Content />;
 }

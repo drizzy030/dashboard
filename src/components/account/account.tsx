@@ -76,7 +76,9 @@ export async function Account() {
                         label="Verified"
                         defaultValue={
                           session?.user.emailVerified
-                            ? session.user.emailVerified.toString()
+                            ? new Date(
+                                session?.user.emailVerified ?? "",
+                              ).toLocaleDateString()
                             : "Not Verified"
                         }
                         className="max-w-xs"
@@ -86,7 +88,9 @@ export async function Account() {
                         isDisabled
                         type="text"
                         label="Created At"
-                        defaultValue={session?.user.createdAt.toString()}
+                        defaultValue={new Date(
+                          session?.user.createdAt ?? "",
+                        ).toLocaleDateString()}
                         className="max-w-xs"
                       />
                       <Input
