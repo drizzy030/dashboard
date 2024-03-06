@@ -22,11 +22,11 @@ export async function CardExpenditure2() {
             {session?.user.transactions.reduce(
               (total, transaction) => total + transaction.price,
               0,
-            )}{" "}
+            )}
             $
           </span>
           <span className="text-xs text-danger">
-            -{" "}
+            -
             {session?.user.transactions.reduce(
               (total, transaction) => total + transaction.price,
               0,

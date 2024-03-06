@@ -3,17 +3,16 @@ import { NextResponse, type NextRequest } from "next/server";
 import { db } from "~/server/db";
 
 interface EventData {
-  customer_email: string;
   name: string;
+  customer_email: string;
   product_type: string;
-  quantity: number;
-  serials: string[];
   gateway: string;
   crypto_address: string;
   crypto_amount: number;
   crypto_confirmations_needed: number;
+  quantity: number;
   status: string;
-  product_title: string;
+  serials: string[];
   product: {
     title: string;
     description: string;
@@ -32,10 +31,10 @@ export async function POST(req: NextRequest) {
 
   const email = event.data.customer_email;
 
-  if (event.event !== "order:paid" || !email) {
+  if (event.event !== "order:paid") {
     return NextResponse.json({
       status: 400,
-      message: "Invalid event or missing email",
+      message: "Not paid event",
     });
   }
 
@@ -53,7 +52,7 @@ export async function POST(req: NextRequest) {
         shop: event.data.name,
         type: event.data.product_type,
         quantity: event.data.quantity,
-        serial: event.data?.serials?.[0],
+        serial: event.data.serials[0],
         title: event.data.product.title,
         description: event.data.product.description,
         price: event.data.product.price_display,
@@ -76,6 +75,7 @@ export async function POST(req: NextRequest) {
         productId: product.id,
       },
     });
+
     if (user.role !== UserRole.CUSTOMER) {
       await db.user.update({
         where: { id: user.id },
