@@ -12,7 +12,7 @@ export default function Home() {
 
   if (!token) notFound();
 
-  const { mutate: newVerification, isLoading: newVerificationisLoading } =
+  const { mutate: newVerification, isLoading: newVerificationIsLoading } =
     api.auth.newVerification.useMutation({
       onSuccess: ({ success }) => {
         toast.success(success);
@@ -26,7 +26,7 @@ export default function Home() {
     <section>
       <Main>
         <Button
-          isLoading={newVerificationisLoading}
+          isLoading={newVerificationIsLoading}
           onClick={() => {
             newVerification({ token });
           }}

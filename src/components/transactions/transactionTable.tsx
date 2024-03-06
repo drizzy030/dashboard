@@ -181,7 +181,7 @@ export function TransactionTable({
     switch (columnKey) {
       case "status":
         return (
-          // NOTE: Its always success otherwise it wont be in the db you can make created or peding transactions by modifying the sellix webhook api
+          // NOTE: Its always success otherwise it wont be in the db you can add created or peding transactions by modifying the sellix webhook api and update them by event chamge
           <Chip
             startContent={
               <svg

@@ -23,7 +23,7 @@ export async function Account() {
                 <h3 className="text-xl font-semibold">Account</h3>
                 <Card className="w-full ">
                   <CardHeader className="flex gap-3">
-                    <Avatar src={`${session?.user.image}`} radius="md" />
+                    <Avatar src={session?.user.image ?? ""} radius="md" />
                     {session?.user.name}
                   </CardHeader>
                   <Divider />
@@ -76,9 +76,7 @@ export async function Account() {
                         label="Verified"
                         defaultValue={
                           session?.user.emailVerified
-                            ? new Date(
-                                session?.user.emailVerified ?? "",
-                              ).toLocaleDateString()
+                            ? session?.user.emailVerified.toLocaleDateString()
                             : "Not Verified"
                         }
                         className="max-w-xs"
@@ -98,7 +96,7 @@ export async function Account() {
                         isDisabled
                         type="text"
                         label="Products"
-                        defaultValue={session?.user.products.length.toString()}
+                        defaultValue={session?.user?.products?.length.toString()}
                         className="max-w-xs"
                       />
                     </div>

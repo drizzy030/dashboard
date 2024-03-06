@@ -27,7 +27,7 @@ export async function CardTransactions() {
                 <Avatar
                   isBordered
                   color="default"
-                  src={`${session?.user.image}`}
+                  src={session?.user.image ?? ""}
                 />
               </div>
               <span className="font-semibold  text-default-900">

@@ -4,7 +4,7 @@ import { CardProducts1 } from "~/components/home/card-products1";
 import { CardTransactions } from "~/components/home/card-transactions";
 import { CardTransactions3 } from "~/components/home/card-transactions3";
 
-export function Content() {
+export function DashboardHome() {
   return (
     <div className="h-full lg:px-6">
       <div className="mx-auto flex w-full max-w-[90rem] flex-wrap justify-center gap-4  px-4 py-3 sm:pt-10 lg:px-0 xl:flex-nowrap xl:gap-6">

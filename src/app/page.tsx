@@ -102,10 +102,6 @@ export default function Home() {
               <HomePage />
             </div>
           </div>
-          <span
-            className="block h-6 w-[4px] rounded-sm bg-blue-500 xl:h-12"
-            style={{ opacity: 0 }}
-          ></span>
         </div>
         <div className="flex gap-2">
           <Button as={Link} href="/dashboard" radius="sm">
